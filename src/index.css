@@ -15,3 +15,20 @@ html, body {
   height: 100vh;
   color: #e3e3e3;
 }
+
+::placeholder {
+  color: #e3e3e3;
+  font-size: 16px;
+}
+
+.prompt-area {
+  resize: none;
+  width: 700px;
+  background-color: #282a2c;
+  color: #fff;
+  outline: none;
+  border: none;
+  padding: 10px;
+  margin: 10px;
+  font-family: ui-sans-serif,-apple-system,system-ui,Segoe UI,Helvetica,Apple Color Emoji,Arial,sans-serif,Segoe UI Emoji,Segoe UI Symbol;
+}

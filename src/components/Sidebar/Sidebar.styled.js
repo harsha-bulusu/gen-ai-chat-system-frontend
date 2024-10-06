@@ -10,7 +10,7 @@ export const SidebarContainer = styled.aside.withConfig({
     flex-shrink: 0;
     display: flex;
 
-     @media (max-width: 768px) {
+    @media (max-width: 768px) {
         width: ${props => props.isCollapsed ? '60px' : '200px'};
     }
 `
