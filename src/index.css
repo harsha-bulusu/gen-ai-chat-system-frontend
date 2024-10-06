@@ -36,3 +36,7 @@ html, body {
 .history-list :hover {
   overflow-y: scroll;
 }
+
+.MuiBackdrop-root {
+  background-color: transparent !important;
+}

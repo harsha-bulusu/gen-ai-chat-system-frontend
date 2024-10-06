@@ -98,17 +98,9 @@ export const ChatoptionsButtonContainer = styled.div.withConfig({
     }
 `
 
-export const ChatOptionsContainer = styled.div.withConfig({
-  shouldForwardProp: (prop) => prop !== 'options'
-})`
-  visibility: visible;
-  position: fixed;
-  left: 10;
-  top: 50;
-  z-index: 1000;
-  height: 120px;
-  width: 120px;
-  background-color: #2f2f2f;
+export const ChatOptionsContainer = styled.div`
+  outline: none;
+  border: none;
 `
 
 export const ChatOptionIconContainer = styled.div`

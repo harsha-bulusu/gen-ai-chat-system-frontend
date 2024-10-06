@@ -9,6 +9,7 @@ import { SlOptionsVertical } from "react-icons/sl";
 import Tooltip from '@mui/material/Tooltip';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
+import Modal from '@mui/material/Modal';
 
 export default function Sidebar () {
     const [isCollapsed, setCollapsed] = useState(false);
@@ -17,7 +18,7 @@ export default function Sidebar () {
     const [history, setHistory] = useState([])
     const [selectedConversation, setSelectedConversation] = useState(null)
     const [options, setOptions] = useState({
-        visibility: 'hidden',
+        open: false,
         left: '0px',
         right: '0px'
     })
@@ -72,7 +73,7 @@ export default function Sidebar () {
         e.stopPropagation()
         const {clientX, clientY} = e
         console.log(clientX, clientY)
-        setOptions({...options, visibility: 'visible', left: clientX, right: clientY})
+        setOptions({...options, open: true, left: clientX + 20, top: clientY + 10})
     }
 
     return (
@@ -128,7 +129,12 @@ export default function Sidebar () {
                     </List></div>
                 </div> : null}
 
-                {/* <ChatOptionsContainer options={options}>
+                <Modal open={options.open}
+                onClose={() => setOptions({...options, open: false})}
+                style={{width: '120px', backgroundColor: '#2f2f2f', height: '120px', color: '#fff', outline: 'none', position: 'absolute', left: options.left, top: options.top,
+                    borderRadius: '20px'
+                }}>
+                <ChatOptionsContainer>
                         <ChatOption>
                             <ChatOptionIconContainer>
                                 <CiEdit />
@@ -146,7 +152,8 @@ export default function Sidebar () {
                                 <ListItemText>Delete</ListItemText>
                             </ChatOptionTitleContainer>
                         </ChatOption>
-                </ChatOptionsContainer> */}
+                </ChatOptionsContainer>
+                </Modal>
         </SidebarContainer>
     )
 }
