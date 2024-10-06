@@ -1,10 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { NewChatButton, NewChatText, SidebarContainer, ToggleButton } from './Sidebar.styled';
+import React, { useCallback, useEffect, useState } from 'react';
+import { ChatContainer, ChatIconContainer, ChatoptionsButtonContainer, ChatOptionsContainer, ChatOptionIconContainer, ChatOptionTitleContainer, ChatTitleContainer, NewChatButton, NewChatText, SidebarContainer, ToggleButton, ChatOption } from './Sidebar.styled';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { FaPlus } from "react-icons/fa";
+import axios from 'axios';
+import { List, ListItem, ListItemText } from '@mui/material';
+import { IoChatboxOutline } from "react-icons/io5";
+import { SlOptionsVertical } from "react-icons/sl";
+import Tooltip from '@mui/material/Tooltip';
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { CiEdit } from "react-icons/ci";
 
 export default function Sidebar () {
-    const [isCollapsed, setCollapsed] = useState(false)
+    const [isCollapsed, setCollapsed] = useState(false);
+    const [startValue, setStartValue] = useState(0)
+    const [endValue, setEndValue] = useState()
+    const [history, setHistory] = useState([])
+    const [selectedConversation, setSelectedConversation] = useState(null)
+    const [options, setOptions] = useState({
+        visibility: 'hidden',
+        left: '0px',
+        right: '0px'
+    })
 
     useEffect(() => {
         const handleResize = () => {
@@ -22,8 +38,41 @@ export default function Sidebar () {
         return () => window.removeEventListener('resize', handleResize)
     }, [])
 
+    const getHistory = useCallback(() => {
+        axios.get("http://localhost:8080/history")
+        .then(dt => {
+            setHistory([...history, ...dt.data])
+        })
+        .catch(err => console.log(err))
+    }, [history])
+
+    useEffect(() => {
+        getHistory()
+    }, [])
+
     const handleToggle = () => {
         setCollapsed(!isCollapsed)
+    }
+
+    const formatListItem = (text) => {
+        return text.length > 20 
+        ? `${text.substring(0, 17)}...`
+        : text
+    }
+
+    const handleSelectedConversation = id => {
+        setSelectedConversation(id)
+    }
+
+    const handleNewChat = () => {
+        setSelectedConversation(null)
+    }
+
+    const handleChatOptions = e => {
+        e.stopPropagation()
+        const {clientX, clientY} = e
+        console.log(clientX, clientY)
+        setOptions({...options, visibility: 'visible', left: clientX, right: clientY})
     }
 
     return (
@@ -32,10 +81,72 @@ export default function Sidebar () {
                 <GiHamburgerMenu />
             </ToggleButton>
             
-            <NewChatButton>
+            <NewChatButton onClick={handleNewChat}>
                 <FaPlus />
                 {!isCollapsed ? <NewChatText>New chat</NewChatText> : null}
             </NewChatButton>
+
+            {!isCollapsed ? 
+                <div>
+                    <h3>Recent</h3>
+                    <div>
+                    <List 
+                        sx={{
+                            width: '100%',
+                            maxWidth: 360,
+                            bgcolor: 'background.paper',
+                            overflowY: 'scroll',
+                            maxHeight: 400,
+                            backgroundColor: 'transparent',
+                            '& ul': { padding: 0 },
+                        }}
+                        className='history-list'
+                    >
+                        {history.map((item) => {
+                            return <ListItem key={item.id} style={{cursor: 'pointer', padding: '3px'}} onClick={() => handleSelectedConversation(item.id)}>
+                                <ChatContainer isSelected={item.id === selectedConversation}>
+                                    <ChatIconContainer>
+                                        <IoChatboxOutline />
+                                    </ChatIconContainer>
+                                    <ChatTitleContainer>
+                                        <Tooltip title={item.title}>
+                                            <ListItemText>
+                                                {formatListItem(item.title)}
+                                            </ListItemText>
+                                        </Tooltip>
+                                    </ChatTitleContainer>
+                                    <Tooltip title={'options'}>
+                                        <ChatoptionsButtonContainer className='chat-options'
+                                            onClick={handleChatOptions}
+                                            isSelected={item.id === selectedConversation}>
+                                            <SlOptionsVertical />
+                                        </ChatoptionsButtonContainer>
+                                    </Tooltip>
+                                </ChatContainer>
+                            </ListItem>
+                    })}
+                    </List></div>
+                </div> : null}
+
+                {/* <ChatOptionsContainer options={options}>
+                        <ChatOption>
+                            <ChatOptionIconContainer>
+                                <CiEdit />
+                            </ChatOptionIconContainer>
+                            <ChatOptionTitleContainer>
+                                <ListItemText>Rename</ListItemText>
+                            </ChatOptionTitleContainer>
+                        </ChatOption>
+
+                        <ChatOption style={{color: 'red'}}>
+                            <ChatOptionIconContainer>
+                                <RiDeleteBin6Line />
+                            </ChatOptionIconContainer>
+                            <ChatOptionTitleContainer>
+                                <ListItemText>Delete</ListItemText>
+                            </ChatOptionTitleContainer>
+                        </ChatOption>
+                </ChatOptionsContainer> */}
         </SidebarContainer>
     )
 }
