@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const AuthenticationCardContainer = styled.div`
     width: 400px;
-    height: 350px;
+    height: 400px;
     margin: 0 auto;
     background-color: #131314;
     border: none;
@@ -82,4 +82,10 @@ export const OtpAuthWrapper = styled.div`
     justify-content: center;
     align-items: center;
     margin-top: 5px;
+`
+
+export const AuthenticationTitleWrapper = styled.div`
+`
+
+export const AuthenticationTitle = styled.h4`
 `

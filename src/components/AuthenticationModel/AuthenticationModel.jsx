@@ -1,5 +1,5 @@
 import { Button, FilledInput, FormControl, Input, InputLabel, Modal, SvgIcon, TextField } from "@mui/material";
-import { AuthenticationCardContainer, AuthIconContainer, AuthTitleContainer, GoogleAuthContainer, InputEmailContainer, InputOtpContainer, MicrosoftAuthContainer, OtpAuthcontainer, OtpAuthWrapper, OTPButtonContainer } from "./AuthenticationModel.styled";
+import { AuthenticationCardContainer, AuthenticationTitle, AuthenticationTitleWrapper, AuthIconContainer, AuthTitleContainer, GoogleAuthContainer, InputEmailContainer, InputOtpContainer, MicrosoftAuthContainer, OtpAuthcontainer, OtpAuthWrapper, OTPButtonContainer } from "./AuthenticationModel.styled";
 import { useRef, useState } from "react";
 import { MuiOtpInput } from 'mui-one-time-password-input'
 
@@ -73,6 +73,11 @@ export default function AuthenticationModel (props) {
             }}
         >
             <AuthenticationCardContainer>
+                <AuthenticationTitleWrapper>
+                    <AuthenticationTitle>
+                        Welcome, Please Sign in!
+                    </AuthenticationTitle>
+                </AuthenticationTitleWrapper>
                 <GoogleAuthContainer className="auth-options">
                     <AuthIconContainer>
                         <img src="google.svg" height={20} width={20}/>

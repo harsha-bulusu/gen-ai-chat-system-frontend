@@ -10,6 +10,7 @@ import Tooltip from '@mui/material/Tooltip';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { CiEdit } from "react-icons/ci";
 import Modal from '@mui/material/Modal';
+import { isAuthenticated } from '../../util/AuthUtils';
 
 export default function Sidebar () {
     const [isCollapsed, setCollapsed] = useState(false);
@@ -74,6 +75,10 @@ export default function Sidebar () {
         const {clientX, clientY} = e
         console.log(clientX, clientY)
         setOptions({...options, open: true, left: clientX + 20, top: clientY + 10})
+    }
+
+    if (!isAuthenticated()) {
+        return null;
     }
 
     return (
