@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import AuthenticationModel from "../AuthenticationModel";
+import { isAuthenticated } from "../../util/AuthUtils";
 
 export default function AuthenticationWrapper({ children }) {
 
@@ -15,7 +16,7 @@ export default function AuthenticationWrapper({ children }) {
 
     return (
         <>
-            <AuthenticationModel modelOpen={modelOpen} setModelOpen={setModelOpen} />
+            {!isAuthenticated() ? <AuthenticationModel modelOpen={modelOpen} setModelOpen={setModelOpen} /> : null}
             {children}
         </>
     )

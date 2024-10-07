@@ -20,3 +20,21 @@ export const WelcomeMessage = styled.h1`
     -webkit-text-fill-color: transparent; /* Fixes the issue */
     margin: 20px 0;
 `;
+
+export const MessageContainerWrapper = styled.div`
+    color: #fff;
+    font-size: 14px;
+`
+
+export const MessageContainer = styled.div``
+
+export const MessageOptionsContainer = styled.div`
+    display: flex;
+    gap: 10px;
+    margin: 20px 10px;
+`
+
+export const MessageOption = styled.div`
+    font-size: 20px;
+    cursor: pointer;
+`
