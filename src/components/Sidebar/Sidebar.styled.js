@@ -13,6 +13,7 @@ export const SidebarContainer = styled.aside.withConfig({
     justify-content: start;
     gap: 50px;
     padding: 20px;
+    color: #fff !important;
 
     @media (max-width: 768px) {
         width: ${props => props.isCollapsed ? '60px' : '200px'};

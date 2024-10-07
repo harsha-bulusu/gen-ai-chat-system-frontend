@@ -77,7 +77,7 @@ export default function Sidebar () {
     }
 
     return (
-        <SidebarContainer isCollapsed={isCollapsed}>
+        <SidebarContainer isCollapsed={isCollapsed} className='sidebar-container'>
             <ToggleButton onClick={handleToggle}>
                 <GiHamburgerMenu />
             </ToggleButton>
