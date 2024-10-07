@@ -4,12 +4,12 @@ import Sidebar from "./components/Sidebar";
 
 function App() {
   return (
-    <AuthenticationWrapper>
+    // <AuthenticationWrapper>
       <div className="app-container">
         <Sidebar />
         <Main />
       </div>
-    </AuthenticationWrapper>
+    // </AuthenticationWrapper>
   );
 }
 

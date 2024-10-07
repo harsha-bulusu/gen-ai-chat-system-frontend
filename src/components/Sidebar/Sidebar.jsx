@@ -135,6 +135,7 @@ export default function Sidebar () {
                 </div> : null}
 
                 <Modal open={options.open}
+                className='history-mgmt-options'
                 onClose={() => setOptions({...options, open: false})}
                 style={{width: '120px', backgroundColor: '#2f2f2f', height: '120px', color: '#fff', outline: 'none', position: 'absolute', left: options.left, top: options.top,
                     borderRadius: '20px'

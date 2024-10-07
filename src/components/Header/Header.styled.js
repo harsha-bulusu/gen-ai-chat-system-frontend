@@ -42,6 +42,7 @@ export const HeaderOptionsContainer = styled.div`
   display: flex;
   flex-direction:row;
   gap: 50px;
+  margin-right: 10px;
 `
 
 export const ThemeSwitchContainer = styled.div`
@@ -49,4 +50,26 @@ export const ThemeSwitchContainer = styled.div`
   cursor: pointer;
   color: #fff;
   background: transparent;
+`
+
+export const UserProfileOptionscontainer = styled.div`
+  border: none;
+  outline: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+`
+
+export const UserProfileOption = styled.div`
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
+`
+
+export const UserProfileOptionIcon = styled.div`
+  font-size: 20px;
+`
+
+export const UserProfileOptionTitle = styled.div`
 `

@@ -36,7 +36,7 @@ html, body {
   overflow-y: scroll;
 }
 
-.sidebar-container .MuiBackdrop-root {
+.header-options-modal .MuiBackdrop-root, .history-mgmt-options .MuiBackdrop-root {
   background-color: transparent !important;
 }
 
